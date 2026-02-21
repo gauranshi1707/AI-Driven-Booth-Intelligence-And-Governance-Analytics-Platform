@@ -1,7 +1,5 @@
 # FortifyMe
 
-# FortifyMe
-
 ### Security That Learns You
 
 FortifyMe is an on-device behavioral authentication system designed to protect high-risk mobile actions such as payments and sensitive confirmations. Instead of relying solely on credentials like PINs, biometrics, or OTPs, FortifyMe analyzes how a user interacts with the device and detects behavioral anomalies in real time.
