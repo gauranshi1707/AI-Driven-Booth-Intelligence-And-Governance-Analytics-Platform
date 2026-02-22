@@ -1,249 +1,236 @@
-# FortifyMe
+# Digital Booth Intelligence Platform
 
-### Security That Learns You
-
-FortifyMe is an on-device behavioral authentication system designed to protect high-risk mobile actions such as payments and sensitive confirmations. Instead of relying solely on credentials like PINs, biometrics, or OTPs, FortifyMe analyzes how a user interacts with the device and detects behavioral anomalies in real time.
-
-FortifyMe strengthens existing security layers by verifying behavior before allowing sensitive actions to proceed.
+### Hyperlocal Governance Intelligence & Analytics Engine
 
 ---
 
-## Problem Statement
+## Overview
 
-Modern mobile security systems authenticate credentials, not users.
+The Digital Booth Intelligence Platform is a hyperlocal governance analytics system that transforms static booth-level data into a structured, intelligent decision-support engine.
 
-If an attacker:
+It creates a Digital Twin of a Booth by mapping:
 
-* Gains access to an unlocked phone
-* Forces the user to unlock the device
-* Obtains OTP access
+* Booths
+* Streets
+* Citizens
+* Government Schemes
+* Beneficiaries
+* Grievances
+* Notifications
 
-They can complete high-risk transactions without detection.
-
-There is currently no behavioral validation layer inside sensitive mobile flows.
-
-FortifyMe addresses this gap.
-
----
-
-## Solution Overview
-
-FortifyMe operates inside protected transaction flows and:
-
-* Learns the user’s behavioral interaction patterns
-* Builds a baseline profile over multiple sessions
-* Detects anomalous behavior in real time
-* Assigns a risk score before transaction confirmation
-* Applies proportional friction based on risk level
-
-All processing is performed on-device.
+The system enables micro-level governance insights such as scheme coverage analysis, eligibility gap detection, street-wise intelligence, and targeted communication simulation.
 
 ---
 
-## Behavioral Signals Collected
+## Core Features
 
-FortifyMe collects interaction-level signals during protected sessions.
+### Digital Booth Twin
 
-### 1. Keystroke Timing
-
-Time between key press and release (hold duration).
-
-### 2. Inter-Key Latency
-
-Time gap between consecutive key presses.
-
-### 3. Typing Speed per Field
-
-Characters typed divided by time spent in input field.
-
-### 4. Swipe Velocity
-
-Distance moved per unit time during gesture interaction.
-
-### 5. Scroll Acceleration
-
-Rate of change in scrolling speed.
-
-### 6. Device Orientation
-
-Tilt and stability via accelerometer and gyroscope.
-
-### 7. Form Completion Time
-
-Total time from screen load to transaction confirmation.
-
-Each session generates a structured feature vector used for anomaly detection.
-
-No raw biometric data leaves the device.
+* Hierarchical data structure: Booth → Streets → Citizens
+* Structured relational database design
+* Synthetic population simulation for realistic analytics
 
 ---
 
-## Behavioral Intelligence Model
+### Intelligent Segmentation Engine
 
-FortifyMe uses multi-signal anomaly detection.
+Automatic citizen classification based on rule-based logic:
 
-Single deviations are not treated as threats.
+* Youth
+* Senior Citizen
+* Farmer
+* MSME Owner
+* General
 
-Example:
-
-* Slow typing alone → not suspicious
-* Unusual swipe pattern alone → not suspicious
-* Orientation shift alone → not suspicious
-
-However:
-
-Multiple simultaneous deviations
-→ Elevated anomaly score
-
-The model supports gradual drift tolerance:
-
-* Confirmed sessions update baseline slowly
-* Long-term behavioral changes are accommodated
-* Sudden large deviations are flagged
-
-The system detects deviation, not emotional state.
+Segmentation is computed dynamically at data insertion time and stored for analytics.
 
 ---
 
-## Modes of Operation
+### Scheme Mapping and Beneficiary Tracking
 
-### Trusted Users
-
-* Multiple trusted profiles supported
-* Each builds an independent behavioral baseline
-* System differentiates owner, trusted user, and unknown user
+* Many-to-many mapping between citizens and schemes
+* Scheme penetration analytics
+* Beneficiary coverage percentage calculation
 
 ---
 
-### Handoff Mode
+### Gap Detection Engine
 
-Designed for temporary device sharing.
+Identifies:
 
-* Activated manually
-* Default 5-minute duration (customizable)
-* Relaxed anomaly threshold
-* Automatically expires
+* Eligible population
+* Covered beneficiaries
+* Uncovered eligible citizens
+* Gap percentage
 
-Prevents false positives during legitimate sharing.
-
----
-
-### Panic Trigger
-
-Explicit user-activated protection.
-
-Activation:
-
-* User-defined keyword displayed
-* Double tap confirms panic mode
-
-Upon activation:
-
-* Panic mode enabled
-* SMS sent to trusted devices
-* Last known location shared
-* Timestamp recorded
-* Remote lock option available
-* SOS alert capability enabled
-
-Panic trigger is voluntary and explicit.
+This enables actionable governance insights and implementation monitoring.
 
 ---
 
-## Risk Response Flow
+### Booth-Level Analytics
 
-During protected actions:
+Provides:
 
-1. Behavioral signals collected
-2. Feature vector generated
-3. Anomaly score computed
-4. Risk tier assigned
+* Total citizens
+* Total streets
+* Total beneficiaries
+* Segment distribution
+* Booth-level scheme coverage
 
-### Low Risk
-
-Transaction proceeds normally.
-
-### Medium Risk
-
-Additional authentication required.
-
-### High Risk
-
-Transaction temporarily blocked.
-Re-authentication required.
-Optional trusted-device alert triggered.
-
-FortifyMe protects high-risk actions without locking the entire device.
+Acts as the Digital Booth Summary endpoint for dashboards.
 
 ---
 
-## Cross-Device Sync
+### Street-Level Intelligence
 
-FortifyMe supports secure behavioral model synchronization across devices to:
+* Street-wise scheme penetration
+* Hyperlocal citizen filtering
+* Street-level grievance tracking
+* Heatmap-ready coverage data
 
-* Prevent cold-start issues
-* Maintain behavioral continuity
-* Preserve trusted user profiles
+---
 
-Only processed behavioral models are synced, not raw logs.
+### Issue and Grievance Tracking
+
+* Street-level issue reporting
+* Status tracking (Open / Closed)
+* Accountability mapping at micro level
+
+---
+
+### Hyperlocal Notification Simulation
+
+Simulates targeted governance communication:
+
+* Sends notification to specific streets
+* Targets only consented citizens
+* Returns number of affected households
+* Enforces role-based access control
+
+---
+
+### Role-Based Access Control (Basic)
+
+Implements a simple role check mechanism:
+
+* Admin
+* Volunteer
+* Analyst
+
+Critical endpoints (e.g., notification dispatch) are restricted to authorized roles.
+
+---
+
+## System Architecture
+
+Frontend (Future Integration)
+↓
+FastAPI Backend
+↓
+SQLAlchemy ORM
+↓
+PostgreSQL Database
+
+---
+
+## Data Model
+
+### Core Tables
+
+* booths
+* streets
+* citizens
+* schemes
+* beneficiaries
+* issues
+* notifications
+* users
+
+### Relationships
+
+Booth
+→ Streets
+→ Citizens
+↔ Schemes (Many-to-Many via Beneficiaries)
+→ Issues
+→ Notifications
+
+---
+
+## Analytics Capabilities
+
+The system supports:
+
+* Scheme coverage percentage
+* Booth-level penetration analysis
+* Street-level penetration analysis
+* Segment distribution reporting
+* Eligibility gap detection
+* Targeted household counts
+* Governance summary metrics
+
+---
+
+## Sample API Endpoints
+
+Booth Summary
+GET /booths/{booth_id}/summary
+
+Scheme Coverage
+GET /schemes/{scheme_id}/coverage
+
+Gap Analysis
+GET /schemes/{scheme_id}/gap-analysis
+
+Street-Level Citizens
+GET /streets/{street_id}/citizens
+
+Send Hyperlocal Notification
+POST /notifications/
+
+---
+
+## Synthetic Data Generation
+
+The project includes a data generation script using:
+
+* Faker
+* Pandas
+
+It generates 200–300 synthetic citizens with realistic age and occupation distributions across multiple streets. This enables full analytics demonstration without using real voter data.
+
+---
+
+## Privacy and Ethical Considerations
+
+* No real personal data is used
+* Consent-based targeting logic implemented
+* Role-based access control enforced
+* Designed for governance analytics and public administration support
 
 ---
 
 ## Technology Stack
 
-Frontend:
-
-* Android (Kotlin)
-
-Behavior Capture:
-
-* Touch event listeners
-* TextWatcher
-* GestureDetector
-* SensorManager (Accelerometer & Gyroscope)
-
-Model:
-
-* On-device anomaly detection
-* Isolation Forest or statistical Z-score model
-* Sub-100 ms inference time
-
-Storage:
-
-* Encrypted local database
+* Python
+* FastAPI
+* SQLAlchemy
+* PostgreSQL
+* Faker
+* Pandas
 
 ---
 
-## Privacy & Security Principles
+## Vision
 
-* No cross-app monitoring
-* No system-wide keylogging
-* No raw data transmission
-* On-device scoring only
-* User-controlled panic activation
-* Explicit consent for location sharing
+The Digital Booth Intelligence Platform enables:
 
-Privacy-first by design.
+* Data-driven governance
+* Micro-level accountability
+* Scheme penetration monitoring
+* Gap identification
+* Hyperlocal decision support
 
----
-
-## Implementation Plan
-
-Phase 1
-Develop protected transaction flow and interaction capture engine.
-
-Phase 2
-Implement feature extraction and baseline modeling.
-
-Phase 3
-Integrate anomaly scoring and risk classification.
-
-Phase 4
-Add Trusted Users, Handoff Mode, and Panic Trigger.
-
-Phase 5
-Testing, threshold tuning, demo preparation.
+It transforms static booth-level records into a living governance intelligence system.
 
 ---
-* A more technical developer-focused README
-* Or a research-oriented version for academic submission
